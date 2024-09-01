@@ -10,9 +10,6 @@ import { ConfigModule } from '@/config'
 import { ProvidersModule } from '@/providers'
 import { MiddlewareModule } from '@/middleware'
 
-// Modules
-import { FeatureModule } from './modules'
-
 // Middleware
 import { RequestContextMiddleware, UserAgentMiddleware } from '@/middleware'
 
@@ -25,9 +22,6 @@ import { RequestContextMiddleware, UserAgentMiddleware } from '@/middleware'
         ConfigModule,
         MiddlewareModule,
         ProvidersModule,
-
-        // Modules
-        FeatureModule,
     ],
     controllers: [AppController],
 })
