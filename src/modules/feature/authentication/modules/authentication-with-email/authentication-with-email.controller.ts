@@ -24,8 +24,10 @@ export class AuthenticationWithEmailController {
     }
 
     @Post('/login')
-    async login(): Promise<Api.Response<null>> {
-        const data = await this._authenticationWithEmailService.login()
+    async login(
+        @Body() dto: Authentication.Api.LoginWithEmailParams,
+    ): Promise<Api.Response<Authentication.Api.Tokens>> {
+        const data = await this._authenticationWithEmailService.login(dto)
 
         return {
             data,

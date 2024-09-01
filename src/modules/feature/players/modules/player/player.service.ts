@@ -25,6 +25,9 @@ export class PlayerService {
             byId: (id: string): Promise<Player | null> => {
                 return this._repository.retrieve(id)
             },
+            byUserId: (id: string): Promise<Player | null> => {
+                return this._repository.findOne({ user: id })
+            },
         }
     }
 }
