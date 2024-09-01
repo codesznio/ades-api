@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common'
 
+import { GameplayDatabaseProviderModule } from '@/modules/feature/gameplay/gameplay.provider'
+
 @Module({
-    imports: [],
+    imports: [GameplayDatabaseProviderModule],
 })
 export class MongoDatabaseProviderModule {}

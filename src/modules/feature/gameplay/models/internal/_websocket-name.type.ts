@@ -1,7 +1,5 @@
-import { Gameplay } from '@/modules/feature/gameplay/models'
-
 export const WebsocketName = {
-    ...Gameplay.Internal.WebsocketName,
+    GAME: 'GAME',
 } as const
 
 export type WebsocketName = (typeof WebsocketName)[keyof typeof WebsocketName]

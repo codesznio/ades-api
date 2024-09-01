@@ -19,9 +19,7 @@
         "noFallthroughCasesInSwitch": false,
         "paths": {
             "@/*": ["./src/*"],
-            "@/authentication/*": ["./src/modules/feature/authentication/*"],
-            "@/permissions/*": ["./src/modules/feature/permissions/*"],
-            "@/users/*": ["./src/modules/feature/users/*"]
+            "@/gameplay/*": ["./src/modules/feature/gameplay/*"]
         }
     }
 }
