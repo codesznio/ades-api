@@ -11,7 +11,7 @@ import { ProvidersModule } from '@/providers'
 import { MiddlewareModule } from '@/middleware'
 
 // Modules
-import { AggregateModule, FeatureModule } from './modules'
+import { FeatureModule } from './modules'
 
 // Middleware
 import { RequestContextMiddleware, UserAgentMiddleware } from '@/middleware'
@@ -27,7 +27,6 @@ import { RequestContextMiddleware, UserAgentMiddleware } from '@/middleware'
         ProvidersModule,
 
         // Modules
-        AggregateModule,
         FeatureModule,
     ],
     controllers: [AppController],
