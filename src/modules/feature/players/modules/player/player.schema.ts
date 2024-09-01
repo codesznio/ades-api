@@ -1,5 +1,6 @@
-import { Schema, SchemaFactory } from '@nestjs/mongoose'
-
+import { Data } from '@/types'
+import { Schema, SchemaFactory, Prop } from '@nestjs/mongoose'
+import { Types, Schema as MongooseSchema } from 'mongoose'
 export type PlayerDocument = Player & Document
 
 @Schema({
@@ -9,6 +10,12 @@ export type PlayerDocument = Player & Document
 })
 export class Player {
     _id: string
+
+    @Prop({
+        type: MongooseSchema.Types.ObjectId,
+        ref: Data.SchemaName.USER,
+    })
+    user: Types.ObjectId
 }
 
 const PlayerSchema = SchemaFactory.createForClass(Player)

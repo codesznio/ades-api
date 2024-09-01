@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
-import { AuthenticationWithEmailModule } from './modules'
+import { AuthenticationWithEmailModule, JwtModule } from './modules'
 
 @Module({
-    imports: [AuthenticationWithEmailModule],
+    imports: [AuthenticationWithEmailModule, JwtModule],
 })
 export class AuthenticationModule {}

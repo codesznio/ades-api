@@ -1,4 +1,5 @@
 export * from './common'
 export * from './database'
+export * from './query'
 export * from './schemas'
 export * from './websockets'

@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 
 // Providers
 import { UserProviders, UserProvidersSchema } from './user-providers'
+import { UserTokens, UserTokensSchema } from './user-tokens'
 
 export type UserDocument = User & Document
 
@@ -15,6 +16,9 @@ export class User {
 
     @Prop({ _id: false, type: UserProvidersSchema })
     providers: UserProviders
+
+    @Prop({ _id: false, type: UserTokensSchema })
+    tokens: UserTokens
 }
 
 const UserSchema = SchemaFactory.createForClass(User)

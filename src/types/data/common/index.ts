@@ -1,6 +1,3 @@
-export * from './_error-data.type'
-export * from './_error-impact.type'
-export * from './_filter.dto'
-export * from './_initiant.type'
-export * from './_pagination.dto'
-export * from './_sorting.dto'
+import * as Common from './common'
+
+export { Common }
