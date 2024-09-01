@@ -1,12 +1,16 @@
 import { Data } from '@/types'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Types, Schema as MongooseSchema } from 'mongoose'
+import { Gameplay } from '../../../models'
 
-// Types
-import { Gameplay } from '@/gameplay/models'
+export type GameDocument = Game & Document
 
-@Schema()
-export class Game extends Document {
+@Schema({
+    _id: true,
+    timestamps: true,
+    versionKey: false,
+})
+export class Game {
     _id: string
 
     @Prop({
@@ -22,4 +26,16 @@ export class Game extends Document {
     action: Gameplay.GameStatus
 }
 
-export const GameSchema = SchemaFactory.createForClass(Game)
+const GameSchema = SchemaFactory.createForClass(Game)
+
+GameSchema.set('toJSON', {
+    transform: function (_, doc) {
+        delete doc.createdAt
+        delete doc.updatedAt
+        delete doc.__v
+
+        return doc
+    },
+})
+
+export { GameSchema }

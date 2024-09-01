@@ -6,7 +6,6 @@ export type PlayerDocument = Player & Document
     _id: true,
     timestamps: true,
     versionKey: false,
-    collection: 'logs',
 })
 export class Player {
     _id: string

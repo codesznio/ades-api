@@ -11,9 +11,13 @@ import { GameRepository } from './game.repository'
 import { GameService } from './game.service'
 import { GameGateway } from './game.gateway'
 
+// Modules
+import { GameCounterModule } from '../game-counter'
+
 @Module({
     imports: [
         MongooseModule.forFeature([{ name: Data.SchemaName.GAME, schema: GameSchema }], Data.DatabaseName.GAMEPLAY),
+        GameCounterModule,
     ],
     providers: [GameFactory, GameRepository, GameService, GameGateway],
     exports: [GameService],
