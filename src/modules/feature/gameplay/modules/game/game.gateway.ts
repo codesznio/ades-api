@@ -1,25 +1,22 @@
-import { WebSocketGateway, WebSocketServer } from '@nestjs/websockets'
+import {
+    WebSocketGateway,
+    WebSocketServer,
+    OnGatewayInit,
+    OnGatewayConnection,
+    OnGatewayDisconnect,
+} from '@nestjs/websockets'
 import { Server } from 'socket.io'
 
-// Service
-import { GameService } from './game.service'
+@WebSocketGateway({
+    namespace: 'game',
+    cors: {
+        origin: '*', // Adjust based on your security needs
+    },
+})
+export class GameGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
+    @WebSocketServer() server: Server
 
-@WebSocketGateway({ namespace: '/game' })
-export class GameGateway {
-    @WebSocketServer()
-    server: Server
-
-    constructor(private readonly _gameService: GameService) {}
-
-    // @SubscribeMessage('joinGame')
-    // async handleJoinGame(@MessageBody('playerId') playerId: string, @ConnectedSocket() client: Socket) {
-    //     const room = await this._gameService.joinRoom(playerId)
-    //     client.join(room.roomId)
-
-    //     this.server.to(room.roomId).emit('player_joined', { playerId })
-
-    //     if (room.status === 'started') {
-    //         this.server.to(room.roomId).emit('game_started', room)
-    //     }
-    // }
+    afterInit() {}
+    handleConnection() {}
+    handleDisconnect() {}
 }

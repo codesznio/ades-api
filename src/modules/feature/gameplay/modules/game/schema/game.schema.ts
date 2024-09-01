@@ -1,7 +1,9 @@
 import { Data } from '@/types'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Types, Schema as MongooseSchema } from 'mongoose'
-import { Gameplay } from '../../../models'
+
+import { Gameplay } from '@/modules/feature/gameplay/models'
+import { GameDates, GameDatesSchema } from './game-dates.schema'
 
 export type GameDocument = Game & Document
 
@@ -22,8 +24,15 @@ export class Game {
     @Prop({
         type: String,
         enum: Object.values(Gameplay.GameStatus),
+        default: Gameplay.GameStatus.WAITING,
     })
-    action: Gameplay.GameStatus
+    status: Gameplay.GameStatus
+
+    @Prop({ type: GameDatesSchema })
+    dates: GameDates
+
+    @Prop({ type: Number })
+    count: number
 }
 
 const GameSchema = SchemaFactory.createForClass(Game)
