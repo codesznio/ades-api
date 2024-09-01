@@ -12,6 +12,7 @@ import { MiddlewareModule } from '@/middleware'
 
 // Middleware
 import { RequestContextMiddleware, UserAgentMiddleware } from '@/middleware'
+import { FeatureModule } from './modules/feature'
 
 @Module({
     imports: [
@@ -22,6 +23,9 @@ import { RequestContextMiddleware, UserAgentMiddleware } from '@/middleware'
         ConfigModule,
         MiddlewareModule,
         ProvidersModule,
+
+        // Feature
+        FeatureModule,
     ],
     controllers: [AppController],
 })
