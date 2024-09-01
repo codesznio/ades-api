@@ -3,7 +3,6 @@ import { Injectable } from '@nestjs/common'
 // User Log
 import { GameFactory } from './game.factory'
 import { GameRepository } from './game.repository'
-import { Gameplay } from '../../models'
 import { Game } from './schema'
 
 @Injectable()
@@ -23,8 +22,16 @@ export class GameService {
 
     get retrieve() {
         return {
-            available: (): Promise<Game | null> => {
-                return this._repository.findOne({ action: Gameplay.GameStatus.WAITING, players: { $size: { $lt: 4 } } })
+            available: async (id: string): Promise<Game | null> => {
+                const available = await this._repository.findOne({
+                    status: 'WAITING',
+                    $expr: { $lt: [{ $size: '$players' }, 4] },
+                    players: { $nin: [id] }, // Ensure the player's ID is not in the players array
+                })
+
+                console.log(available)
+
+                return available
             },
             byId: (id: string): Promise<Game | null> => {
                 return this._repository.retrieve(id)
