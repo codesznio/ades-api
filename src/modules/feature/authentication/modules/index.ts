@@ -1,1 +1,1 @@
-export {}
+export * from './authentication-with-email'
