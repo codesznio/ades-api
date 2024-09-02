@@ -29,8 +29,6 @@ export class AccessStrategy extends PassportStrategy(Strategy, 'jwt') {
             this._playerService.retrieve.byId(payload.player),
         ])
 
-        console.log(user, player)
-
         return {
             player: player._id,
             user: user._id,

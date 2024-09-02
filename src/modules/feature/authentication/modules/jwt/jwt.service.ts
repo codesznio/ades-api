@@ -12,18 +12,18 @@ import { Authentication } from '@/modules/feature/authentication/models'
 @Injectable()
 export class JwtService {
     constructor(
-        private readonly _configService: ConfigService,
+        private readonly config: ConfigService,
         private readonly _nestJWTService: NestJWTService,
     ) {}
 
     private _signToken(payload: Authentication.Api.JwtPayload, refresh: boolean): Promise<string> {
         return this._nestJWTService.signAsync(payload, {
             secret: refresh
-                ? this._configService.get<string>('authentication.jwt_refresh')
-                : this._configService.get<string>('authentication.jwt_access'),
+                ? this.config.get<string>('authentication.jwt_refresh')
+                : this.config.get<string>('authentication.jwt_access'),
             // expiresIn: refresh ? '7d' : '10m',
             expiresIn: refresh ? '7d' : '1d',
-            issuer: this._configService.get<string>('authentication.jwt_issuer'),
+            issuer: this.config.get<string>('authentication.jwt_issuer'),
         })
     }
 
@@ -46,5 +46,16 @@ export class JwtService {
         ])
 
         return { access, refresh }
+    }
+
+    public async verifyToken(token: string): Promise<Authentication.Api.JwtPayload> {
+        try {
+            const secret = this.config.get<string>('authentication.jwt_access')
+
+            return await this._nestJWTService.verifyAsync(token, { secret })
+        } catch (error) {
+            console.error('Token verification failed:', error)
+            throw error
+        }
     }
 }
